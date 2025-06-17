@@ -1,14 +1,24 @@
 import streamlit as st
 
-# Placeholder humanizer function (replace with your AI logic later)
+# Placeholder humanizer function (replace with real AI logic later)
 def simple_humanizer(text):
-    # For now, just reverse the text (for demo purposes)
+    # For demonstration, just reverse the text (replace with your AI model)
     return text[::-1]
 
 st.title("AI Humanizer: Humanize Your Text or Markdown")
 
+st.write(
+    """
+    Upload a Markdown (.md) or text (.txt) file, or paste your text below.
+    Click "Humanize Content" to rewrite your content in a more human-like style.
+    You can then download the humanized result as a Markdown file.
+    """
+)
+
 # File uploader for Markdown or text files
-uploaded_file = st.file_uploader("Upload a Markdown (.md) or text file", type=["md", "txt"])
+uploaded_file = st.file_uploader(
+    "Upload a Markdown (.md) or text file", type=["md", "txt"]
+)
 
 # Text area for direct input
 input_text = st.text_area("Or paste your text here:")
@@ -32,4 +42,12 @@ if content:
         humanized = simple_humanizer(content)
         st.write("### Humanized Output:")
         st.markdown(humanized)
+
+        # Download button for the humanized text
+        st.download_button(
+            label="Download Humanized Text",
+            data=humanized,
+            file_name="humanized_output.md",
+            mime="text/markdown"
+        )
         
